@@ -8,7 +8,11 @@ Proyecto del periodo #1. Programando el ESP32
 
 
 MATERIA: Electronica Microcontrolada
+
 NOMBRE DEL GRUPO: Grupo04
+
 INTEGRANTES: 
+
 DOCENTE: Cristián Gonzalo Vera
+
 AÑO: 2023
