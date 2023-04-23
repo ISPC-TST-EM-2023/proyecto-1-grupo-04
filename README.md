@@ -11,7 +11,7 @@ MATERIA: Electronica Microcontrolada
 
 NOMBRE DEL GRUPO: Grupo04
 
-INTEGRANTES: 
+INTEGRANTES: Dupetit Santiago
 
 DOCENTE: Cristián Gonzalo Vera
 
