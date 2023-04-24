@@ -9,14 +9,22 @@ Proyecto del periodo #1. Programando el ESP32
 
 MATERIA: Electronica Microcontrolada
 
+
 NOMBRE DEL GRUPO: Grupo04
 
-INTEGRANTES: Dupetit Santiago
+
+INTEGRANTES: 
+
+             Dupetit Santiago
+             
              Paula Gudiño Fissore
+             
              Jose Augusto Orsili
+             
              Paola Daniela Villafañe
 
 
 DOCENTE: Cristián Gonzalo Vera
+
 
 AÑO: 2023
