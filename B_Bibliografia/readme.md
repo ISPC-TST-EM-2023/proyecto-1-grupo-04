@@ -6,6 +6,3 @@ A continuación se adjuntan links de vídeos los cuales corresponden a:
 
 
 ![Cómo programar el ESP32 con Visual Studio Code y Platformio](https://www.youtube.com/watch?v=OuE7YBovWWE)
-
-
-![Cómo programar el ESP32 con Visual Studio Code y Platformio ](https://www.youtube.com/watch?v=OuE7YBovWWE)
