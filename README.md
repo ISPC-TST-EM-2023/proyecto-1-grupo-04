@@ -32,6 +32,6 @@ Proyecto del periodo #1. Programando el ESP32
 ### Development Team
 * Paula Gudiño Fissore
 * Paola Daniela Villafañe
-* Jairo Guimar Jesus Moren
+* Jairo Guimar Jesus Moreno
 
 ### AÑO: 2023
