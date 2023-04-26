@@ -2,6 +2,8 @@
 
 
 A continuación se adjuntan links de vídeos los cuales corresponden a:
+
+
 ![Curso sobre el Esp32](https://www.youtube.com/watch?v=VuJkqL2Ys3Y&list=PLCTD_CpMeEKTvjzabAvLGHakg-ql6t0q6)
 
 
