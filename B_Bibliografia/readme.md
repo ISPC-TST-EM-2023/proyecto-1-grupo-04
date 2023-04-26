@@ -1,4 +1,4 @@
-####En este directorio agregamos datos del ESP32 que nos pueda ser de utilidad para el desarrollo del proyecto.
+#### En este directorio agregamos datos del ESP32 que nos pueda ser de utilidad para el desarrollo del proyecto.
 
 
 A continuación se adjuntan links de vídeos los cuales corresponden a:
