@@ -1,0 +1,1 @@
+Información adicional sobre la programación del ESP32, aquí describiremos IDE y recursos que estaremos utilizando.
