@@ -35,3 +35,5 @@ Proyecto del periodo #1. Programando el ESP32
 * Jairo Guimar Jesus Moren
 
 ### AÑO: 2023
+
+## Video: [![Alt text](https://img.youtube.com/vi/qOq5m6Gp-8Q/0.jpg)](https://www.youtube.com/watch?v=qOq5m6Gp-8Q)
