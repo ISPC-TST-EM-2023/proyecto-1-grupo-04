@@ -16,7 +16,7 @@ Proyecto del periodo #1. Programando el ESP32
 ### INTEGRANTES: 
 
   * Santiago Dupetit            
-  * Paula Gudiño Fissore             
+  * Paula Lucía Gudiño Fissore             
   * Jose Augusto Orsili             
   * Paola Daniela Villafañe
   * Jairo Guimar Jesus Moreno
@@ -30,7 +30,7 @@ Proyecto del periodo #1. Programando el ESP32
 * Santiago Dupetit
 
 ### Development Team
-* Paula Gudiño Fissore
+* Paula Lucía Gudiño Fissore
 * Paola Daniela Villafañe
 * Jairo Guimar Jesus Moreno
 
