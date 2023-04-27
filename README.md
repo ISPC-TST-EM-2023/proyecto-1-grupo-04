@@ -21,7 +21,7 @@ Proyecto del periodo #1. Programando el ESP32
   * Paola Daniela Villafañe
   * Jairo Guimar Jesus Moreno
 
-## DOCENTE: Cristián Gonzalo Vera
+## DOCENTE: Cristian Gonzalo Vera
 
 ### Product Owner
 * Jose Augusto Orsili
