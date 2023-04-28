@@ -1,1 +1,1 @@
-Se incluirá detalle sobre como desarrollaremos el software.
+## Se incluirá detalle sobre como desarrollaremos el software.
