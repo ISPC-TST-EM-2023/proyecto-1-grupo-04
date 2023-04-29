@@ -84,7 +84,7 @@ void handleAnalogInputs() {
   String html = "<html><head><title>Analog Inputs</title></head><body>";
   html += "<h1>Analog Inputs</h1>";
   html += "<ul>";
-  // pegar aqui el codigo de los pines analogicos  Jose
+  html += "<li>Input 1: " + String(analogRead(inputPin1)) + "</li>";
   html += "<li>Input 2: " + String(analogRead(inputPin2)) + "</li>"; 
   // pegar aqui el codigo de los pines analogicos  jairo
   html += "<li>Input 4: " + String(analogRead(inputPin4)) + "</li>";
@@ -100,6 +100,7 @@ String html = "<html><head><title>Digital Inputs</title></head><body>";
 html += "<h1>Digital Inputs</h1>";
 html += "<ul>";
 html += "<li>Input 5: " + String(digitalRead(inputPin5)) + "</li>";
+html += "<li>Input 6: " + String(digitalRead(inputPin6)) + "</li>";
   // pegar aqui el codigo de los pines digitales  jairo
   // pegar aqui el codigo de los pines digitales  paola
 
