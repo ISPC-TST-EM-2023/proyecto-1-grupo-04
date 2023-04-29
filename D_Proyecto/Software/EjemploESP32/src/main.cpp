@@ -2,8 +2,8 @@
 #include <WebServer.h>
 
 // Nombre de la red Wi-Fi y contraseña
-const char* ssid = "nombre_de_la_red";
-const char* password = "contraseña_de_la_red";
+const char* ssid = "lacasona";
+const char* password = "cordoba2023";
 
 // Crear una instancia de WebServer
 WebServer server(80);
@@ -102,6 +102,7 @@ html += "<ul>";
  // pegar aqui el codigo de los pines digitales  paula
   // pegar aqui el codigo de los pines digitales  jairo
   // pegar aqui el codigo de los pines digitales  paola
+
 html += "<li>Input 8: " + String(digitalRead(inputPin8)) + "</li>";
 html += "</ul>";
 html += "<a href="/">Back</a>";
