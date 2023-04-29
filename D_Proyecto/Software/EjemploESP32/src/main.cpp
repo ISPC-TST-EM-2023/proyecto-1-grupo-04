@@ -1,138 +1,147 @@
-#include <Arduino.h>
 #include <WiFi.h>
+#include <WebServer.h>
 
-// Reemplace con su nombre de red y contraseña  
-const char* ssid = "SSID"; // Nombre de la red
-const char* password = "Pasword"; // Contraseña de la red 
+// Nombre de la red Wi-Fi y contraseña
+const char* ssid = "nombre_de_la_red";
+const char* password = "contraseña_de_la_red";
 
-// Establece el número de puerto para el servidor web
-WiFiServer server(80);
+// Crear una instancia de WebServer
+WebServer server(80);
 
-// Variable para almacenar el estado actual de la salida
-String header;
+// Pines de entrada analógica
+int inputPin1 = 34;
+int inputPin2 = 35;
+int inputPin3 = 36;
+int inputPin4 = 39;
 
-// Variable auxiliar para almacenar el estado actual de la salida
-String output2State = "off";
+// Pines de entrada digital
+int inputPin5 = 23;
+int inputPin6 = 22;
+int inputPin7 = 21;
+int inputPin8 = 19;
 
-// Asigna el número de pin de la salida
-const int output2 = 2;
-
-// Current time
-unsigned long currentTime = millis();
-// Previous time
-unsigned long previousTime = 0; 
-// Define el tiempo de espera en 2000ms (2s)
-const long timeoutTime = 2000;
+// Pines de salida digital
+int outputPin1 = 18;
+int outputPin2 = 5;
+int outputPin3 = 17;
+int outputPin4 = 16;
 
 void setup() {
-  Serial.begin(115200);
-  // Ajusta GPIO2 como salida
-  pinMode(output2, OUTPUT);
-  // Lo inicializa en estado bajo
-  digitalWrite(output2, LOW);
+  // Inicializar pines de entrada y salida
+  pinMode(inputPin1, INPUT);
+  pinMode(inputPin2, INPUT);
+  pinMode(inputPin3, INPUT);
+  pinMode(inputPin4, INPUT);
+  pinMode(inputPin5, INPUT);
+  pinMode(inputPin6, INPUT);
+  pinMode(inputPin7, INPUT);
+  pinMode(inputPin8, INPUT);
+  pinMode(outputPin1, OUTPUT);
+  pinMode(outputPin2, OUTPUT);
+  pinMode(outputPin3, OUTPUT);
+  pinMode(outputPin4, OUTPUT);
 
-  // Conecta a la red Wi-Fi
-  Serial.print("Conectando a ");
-  Serial.println(ssid);
+  // Inicializar conexión Wi-Fi
+  Serial.begin(115200);
   WiFi.begin(ssid, password);
   while (WiFi.status() != WL_CONNECTED) {
-    delay(500);
-    Serial.print(".");
+    delay(1000);
+    Serial.println("Connecting to WiFi...");
   }
-  // Imprime la dirección IP asignada por el router
-  // Esta es la IP que debe usar para acceder al servidor web
-  Serial.println("");
-  Serial.println("Conexión establecida.");
-  Serial.println("Dirección IP: ");
-  Serial.println(WiFi.localIP());
+  Serial.println("Connected to WiFi");
+
+  // Configurar rutas del servidor web
+  server.on("/", handleRoot);
+  server.on("/analog_inputs", handleAnalogInputs);
+  server.on("/digital_inputs", handleDigitalInputs);
+  server.on("/digital_outputs", handleDigitalOutputs);
+
+  // Iniciar servidor web
   server.begin();
+  Serial.println("Server started");
 }
 
-void loop(){
-  WiFiClient client = server.available();   // Escucha a los clientes que se conecten
-
-  if (client) {                             // Si un nuevo cliente se conecta,
-    currentTime = millis();
-    previousTime = currentTime;
-    Serial.println("Nuevo cliente.");          // imprime un mensaje en el puerto serie
-    String currentLine = "";                // crea una variable para almacenar los datos entrantes del cliente
-    while (client.connected() && currentTime - previousTime <= timeoutTime) {  // mientras el cliente esté conectado
-      currentTime = millis();
-      if (client.available())
-      {                         // si hay bytes para leer del cliente,
-        char c = client.read(); // lee un byte, y luego
-        Serial.write(c);        // imprímelo en el monitor serie
-        header += c;
-        if (c == '\n')
-        { // si el byte es un carácter de nueva línea
-          // si la línea actual está vacía, tienes dos caracteres de nueva línea seguidos.
-          // ese es el final de la solicitud HTTP del cliente, así que envía una respuesta:
-          if (currentLine.length() == 0)
-          {
-            // Las cabeceras HTTP siempre comienzan con un código de respuesta (por ejemplo, HTTP/1.1 200 OK)
-            // y un tipo de contenido para que el cliente sepa lo que viene, luego una línea en blanco:
-            client.println("HTTP/1.1 200 OK");
-            client.println("Content-type:text/html");
-            client.println("Connection: close");
-            client.println();
-
-            // enciende o apaga el LED
-            if (header.indexOf("GET /2/on") >= 0)
-            {
-              Serial.println("Encendiendo LED");
-              output2State = "on";
-              digitalWrite(output2, HIGH);
-            }
-            else if (header.indexOf("GET /2/off") >= 0)
-            {
-              Serial.println("Apagando LED");
-              output2State = "off";
-              digitalWrite(output2, LOW);
-            }
-
-            // Ahora agregamos la parte de la página web
-            // Display the HTML web page
-            client.println("<!DOCTYPE html><html>");
-            client.println("<head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">");
-            client.println("<link rel=\"icon\" href=\"data:,\">");
-            // CSS to style the on/off buttons
-            client.println("<style>html { font-family: Helvetica; display: inline-block; margin: 0px auto; text-align: center;}");
-            client.println(".button { background-color: #4CAF50; border: none; color: white; padding: 16px 40px;");
-            client.println("text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer;}");
-            client.println(".button2 {background-color: #555555;}</style></head>");
-            // Web Page Heading
-            client.println("<body><h1>Control LED desde página web</h1>");
-
-            // Display current state, and ON/OFF buttons for GPIO 2
-            client.println("<p>Estado LED - " + output2State + "</p>");
-            if (output2State == "off")
-            {
-              client.println("<p><a href=\"/2/on\"><button class=\"button\">ON</button></a></p>");
-            }
-            else
-            {
-              client.println("<p><a href=\"/2/off\"><button class=\"button button2\">OFF</button></a></p>");
-            }
-            client.println("</body></html>");
-
-            // The HTTP response ends with another blank line
-            client.println();
-            break;
-          }
-          else
-          {
-            currentLine = "";
-          }
-        }
-        else if (c != '\r')
-        {
-          currentLine += c;
-        }
-      }
-    }
-    header = "";
-    client.stop();
-    Serial.println("Cliente desconectado.");
-    Serial.println("");
-  }
+void loop() {
+  // Manejar solicitudes del servidor web
+  server.handleClient();
 }
+
+void handleRoot() {
+  // Mostrar página principal
+  String html = "<html><head><title>ESP32 Web Server</title></head><body>";
+  html += "<h1>ESP32 Web Server</h1>";
+  html += "<ul>";
+  html += "<li><a href=\"/analog_inputs\">Analog Inputs</a></li>";
+  html += "<li><a href=\"/digital_inputs\">Digital Inputs</a></li>";
+  html += "<li><a href=\"/digital_outputs\">Digital Outputs</a></li>";
+  html += "</ul>";
+  html += "</body></html>";
+  server.send(200, "text/html", html);
+}
+
+void handleAnalogInputs() {
+  // Aquí mostramos valores de entrada analógica
+  String html = "<html><head><title>Analog Inputs</title></head><body>";
+  html += "<h1>Analog Inputs</h1>";
+  html += "<ul>";
+  // pegar aqui el codigo de los pines analogicos  Jose
+  // pegar aqui el codigo de los pines analogicos  paula
+  // pegar aqui el codigo de los pines analogicos  jairo
+  // pegar aqui el codigo de los pines analogicos  santiago
+html += "</ul>";
+html += "<a href="/">Back</a>";
+html += "</body></html>";
+server.send(200, "text/html", html);
+}
+
+void handleDigitalInputs() {
+// Aquí mostramos valores de entrada digital
+String html = "<html><head><title>Digital Inputs</title></head><body>";
+html += "<h1>Digital Inputs</h1>";
+html += "<ul>";
+ // pegar aqui el codigo de los pines digitales  paula
+  // pegar aqui el codigo de los pines digitales  jairo
+  // pegar aqui el codigo de los pines digitales  paola
+  // pegar aqui el codigo de los pines digitales  santiago
+html += "<li>Input 6: " + String(digitalRead(inputPin6)) + "</li>";
+html += "<li>Input 7: " + String(digitalRead(inputPin7)) + "</li>";
+html += "<li>Input 8: " + String(digitalRead(inputPin8)) + "</li>";
+html += "</ul>";
+html += "<a href="/">Back</a>";
+html += "</body></html>";
+server.send(200, "text/html", html);
+}
+
+void handleDigitalOutputs() {
+// Aquí mostramos  y controlamos valores de salida digital
+String html = "<html><head><title>Digital Outputs</title></head><body>";
+html += "<h1>Digital Outputs</h1>";
+html += "<ul>";
+html += "<li>Output 1: " + String(digitalRead(outputPin1)) + " <a href="/digital_outputs?action=toggle&pin=1">Toggle</a></li>";
+html += "<li>Output 2: " + String(digitalRead(outputPin2)) + " <a href="/digital_outputs?action=toggle&pin=2">Toggle</a></li>";
+html += "<li>Output 3: " + String(digitalRead(outputPin3)) + " <a href="/digital_outputs?action=toggle&pin=3">Toggle</a></li>";
+html += "<li>Output 4: " + String(digitalRead(outputPin4)) + " <a href="/digital_outputs?action=toggle&pin=4">Toggle</a></li>";
+html += "</ul>";
+
+// Manejamos las acciones del usuario
+if (server.hasArg("action")) {
+String action = server.arg("action");
+if (action == "toggle") {
+int pin = server.arg("pin").toInt();
+if (pin == 1) {
+digitalWrite(outputPin1, !digitalRead(outputPin1));
+} else if (pin == 2) {
+digitalWrite(outputPin2, !digitalRead(outputPin2));
+} else if (pin == 3) {
+digitalWrite(outputPin3, !digitalRead(outputPin3));
+} else if (pin == 4) {
+digitalWrite(outputPin4, !digitalRead(outputPin4));
+}
+}
+}
+
+html += "<a href="/">Back</a>";
+html += "</body></html>";
+server.send(200, "text/html", html);
+}
+
