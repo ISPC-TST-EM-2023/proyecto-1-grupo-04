@@ -87,7 +87,7 @@ void handleAnalogInputs() {
   // pegar aqui el codigo de los pines analogicos  Jose
   // pegar aqui el codigo de los pines analogicos  paula
   // pegar aqui el codigo de los pines analogicos  jairo
-  // pegar aqui el codigo de los pines analogicos  santiago
+  html += "<li>Input 4: " + String(analogRead(inputPin4)) + "</li>";
 html += "</ul>";
 html += "<a href="/">Back</a>";
 html += "</body></html>";
