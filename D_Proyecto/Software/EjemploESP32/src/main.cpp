@@ -102,9 +102,6 @@ html += "<ul>";
  // pegar aqui el codigo de los pines digitales  paula
   // pegar aqui el codigo de los pines digitales  jairo
   // pegar aqui el codigo de los pines digitales  paola
-  // pegar aqui el codigo de los pines digitales  santiago
-html += "<li>Input 6: " + String(digitalRead(inputPin6)) + "</li>";
-html += "<li>Input 7: " + String(digitalRead(inputPin7)) + "</li>";
 html += "<li>Input 8: " + String(digitalRead(inputPin8)) + "</li>";
 html += "</ul>";
 html += "<a href="/">Back</a>";
