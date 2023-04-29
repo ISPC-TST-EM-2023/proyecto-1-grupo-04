@@ -99,7 +99,7 @@ void handleDigitalInputs() {
 String html = "<html><head><title>Digital Inputs</title></head><body>";
 html += "<h1>Digital Inputs</h1>";
 html += "<ul>";
- // pegar aqui el codigo de los pines digitales  paula
+html += "<li>Input 5: " + String(digitalRead(inputPin5)) + "</li>";
   // pegar aqui el codigo de los pines digitales  jairo
   // pegar aqui el codigo de los pines digitales  paola
 
