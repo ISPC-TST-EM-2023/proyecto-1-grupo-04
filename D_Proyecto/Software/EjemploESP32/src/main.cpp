@@ -2,8 +2,8 @@
 #include <WebServer.h>
 
 // Nombre de la red Wi-Fi y contraseña
-const char* ssid = "nombre_de_la_red";
-const char* password = "contraseña_de_la_red";
+const char* ssid = "lacasona";
+const char* password = "cordoba2023";
 
 // Crear una instancia de WebServer
 WebServer server(80);
