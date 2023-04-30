@@ -101,8 +101,8 @@ html += "<h1>Digital Inputs</h1>";
 html += "<ul>";
 html += "<li>Input 5: " + String(digitalRead(inputPin5)) + "</li>";
 html += "<li>Input 6: " + String(digitalRead(inputPin6)) + "</li>";
+html += "<li>Input 7: " + String(digitalRead(inputPin7)) + "</li>"; //
   // pegar aqui el codigo de los pines digitales  jairo
-  // pegar aqui el codigo de los pines digitales  paola
 
 html += "<li>Input 8: " + String(digitalRead(inputPin8)) + "</li>";
 html += "</ul>";
